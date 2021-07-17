@@ -42,6 +42,7 @@ std = a.std()
 b = (a-mean)/std
 print(b)
 
+
 a = np.array([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
 
 # Use python's built in functionality/operators to determine the following:
