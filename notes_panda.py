@@ -26,7 +26,22 @@ string_series = pd.Series([' a a a a ', 'CodeuP', 'StUDenTs'])
 # print(letters_series.sort_values())
 # print(letters_series.sort_values(ignore_index=True))
 
-print(string_series.str.replace(' ', '_'))
+# print(string_series.str.replace(' ', '_'))
 
-print((number_series > 0).any())
-print((number_series > 0).all())
+# print((number_series > 0).any())
+# print((number_series > 0).all())
+
+s = pd.Series(list(range(15)))
+s
+
+def total_vowels(input_value):
+    count = 0
+    #vowels = ['a', 'e', 'i', 'o', 'u']
+    for value in input_value:
+        if value in 'aeiou':
+            count = count + 1
+    return count
+
+print(pd.cut(s, 3))
+example = pd.Series(["a", "i","o", "u", "l", 'm'])
+print((example.apply(total_vowels)).sum())
