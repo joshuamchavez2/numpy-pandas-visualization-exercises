@@ -190,9 +190,16 @@ print(numbers_float.nsmallest(n=1, keep="all").values[0])
 
 print(str(numbers_float.nsmallest(n=1, keep="all").values[0]) + "-" + str(numbers_float.nlargest(n=1, keep="all").values[0]))
 
+
+
 # Bin the data into 4 equally sized intervals or bins and output how many values fall into each bin.
 
 binned_data = pd.cut(numbers_float, 4, labels=["0 - 1.9M", "1.9M - 2.39M", "2.39 - 3.59",  "3.59M - 4.78M"]).value_counts()
+
+print("###############")
+print(binned_data)
+print("###############")
+
 
 #Plot the binned data in a meaningful way. Be sure to include a title and axis labels.
 plt.clf()

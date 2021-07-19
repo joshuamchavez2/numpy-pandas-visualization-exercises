@@ -59,11 +59,16 @@ import pandas as pd
 
 
 series = pd.Series([1, 1, 1, 2, 4, 9])
-series = pd.Series([["ant", "ant", "mosquito", "mosquito", "ladybug"], ["juice", "gin"]])
+series = pd.Series([["ant", "ant", "mosquito", "mosquito", "ladybug"], ["juice","ant", "gin"]])
 new_series =series.apply(pd.Series).stack().reset_index(drop = True)
 
-print(new_series)
-    
+
+print(list(new_series.value_counts()[new_series.value_counts().values > 1].index))
 
 
-
+ser1 = pd.Series([1, 2, 3, 4, 5])
+ser2 = pd.Series([3, 4, 5, 6, 7])
+union = pd.Series(np.union1d(ser1, ser2))
+intersect = pd.Series(np.intersect1d(ser1, ser2))
+notcommonseries = union[~union.isin(intersect)]
+print(notcommonseries)
