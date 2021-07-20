@@ -110,14 +110,43 @@ print(mpg[['manufacturer', 'average_mileage']].where(mpg['manufacturer']=='dodge
 
 # Load the Mammals dataset. Read the documentation for it, and use the data to answer these questions:
 
+mam = data('Mammals')
+
+print(mam.head())
+
 # How many rows and columns are there?
+
+print(mam.size)
 
 # What are the data types?
 
+print(mam.info())
+
 # Summarize the dataframe with .info and .describe
+
+print(mam.info())
+print(mam.describe())
 
 # What is the the weight of the fastest animal?
 
+print(mam[['weight', 'speed']].sort_values(by=['speed'], ascending=False).head(1))
+
 # What is the overal percentage of specials?
 
+print(((mam['specials']).sum()/(mam['specials'].size)) *100)
+
 # How many animals are hoppers that are above the median speed? What percentage is this?
+
+#print((mam['speed']).median())
+
+speed_median = (mam['speed']).median()
+
+
+
+print(mam[['hoppers', 'speed']].where((mam['speed']>(mam['speed']).median()) & (mam['hoppers']==True)).\
+sort_values(by=['speed'], ascending=False).dropna().count())
+
+
+
+
+
