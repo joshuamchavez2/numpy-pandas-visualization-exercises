@@ -151,3 +151,43 @@ auto = mpg.average_mileage[mpg.trans.str.contains("auto")].mean()
 manual = mpg.average_mileage[mpg.trans.str.contains("manual")].mean()
 
 print(auto>manual)
+
+###############################################################################################
+# Exercises Part III
+###############################################################################################
+# Use your get_db_url function to help you explore the data from the chipotle database.
+
+def get_db_url(url):
+    url = f'mysql+pymysql://{user}:{password}@{host}/{url}'
+    return url
+
+# What is the total price for each order?
+
+chip = pd.read_sql('SELECT item_price, order_id  FROM orders', get_db_url("chipotle"))
+cleaned_itemprice = chip['item_price'].str.replace("$", "").str.replace(",", "").astype('float')
+chip["int_price"] = cleaned_itemprice
+print(chip.head())
+print(chip.groupby("order_id").int_price.sum())
+
+# What are the most popular 3 items?
+
+chip = pd.read_sql('SELECT item_name, quantity  FROM orders', get_db_url("chipotle"))
+print(chip.groupby("item_name").quantity.sum().sort_values(ascending=False).head(3))
+
+# Which item has produced the most revenue?
+
+print(chip.groupby("item_name").quantity.sum().sort_values(ascending=False).idxmax())
+
+# Join the employees and titles DataFrames together.
+
+joined = pd.read_sql("Select title, to_date, from_date From employees JOIN titles ON titles.emp_no  = employees.emp_no Where to_date > now()", get_db_url("employees"))
+
+print(joined)
+
+# For each title, find the hire date of the employee that was hired most recently with that title.
+
+print(joined.groupby("title").from_date.max())
+
+# Write the code necessary to create a cross tabulation of the number of titles by department.
+# (Hint: this will involve a combination of SQL code to pull the necessary data and python/pandas
+# code to perform the manipulations.)
