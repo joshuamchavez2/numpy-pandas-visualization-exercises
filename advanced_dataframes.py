@@ -180,7 +180,8 @@ print(chip.groupby("item_name").quantity.sum().sort_values(ascending=False).idxm
 
 # Join the employees and titles DataFrames together.
 
-joined = pd.read_sql("Select title, to_date, from_date From employees JOIN titles ON titles.emp_no  = employees.emp_no Where to_date > now()", get_db_url("employees"))
+joined = pd.read_sql("Select title, to_date, from_date From employees JOIN titles\
+    ON titles.emp_no  = employees.emp_no Where to_date > now()", get_db_url("employees"))
 
 print(joined)
 
@@ -191,3 +192,4 @@ print(joined.groupby("title").from_date.max())
 # Write the code necessary to create a cross tabulation of the number of titles by department.
 # (Hint: this will involve a combination of SQL code to pull the necessary data and python/pandas
 # code to perform the manipulations.)
+
