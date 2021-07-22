@@ -193,3 +193,27 @@ print(joined.groupby("title").from_date.max())
 # (Hint: this will involve a combination of SQL code to pull the necessary data and python/pandas
 # code to perform the manipulations.)
 
+#Grab all information from all the tables im going to need using SQL
+employee = pd.read_sql("Select * From employees", get_db_url())
+titles = pd.read_sql("SELECT * FROM titles", get_db_url())
+departments = pd.read_sql("SELECT * FROM departments", get_db_url())
+dept_emp = pd.read_sql("SELECT * FROM dept_emp", get_db_url())
+
+#Rename the titles and dept_emp to_date/from_date since they have the name column name in their Tables
+titles = titles.rename(columns={
+    "to_date": "titles_to_date",
+    "from_date": "titles_from_date"
+})
+
+dept_emp = dept_emp.rename(columns={
+    "to_date": "dept_emp_to_date",
+    "from_date": "dept_emp_from_date"
+})
+
+#Merge all the tables together using inner joins
+merged_table = employee.merge(titles, left_on='emp_no', right_on='emp_no', how='inner')
+merged_table = merged_table.merge(dept_emp, left_on='emp_no', right_on='emp_no', how='inner')
+merged_table = merged_table.merge(departments, left_on='dept_no', right_on='dept_no', how='inner')
+
+#print(merged_table.head())
+print(pd.crosstab(merged_table.title, merged_table.dept_name))
