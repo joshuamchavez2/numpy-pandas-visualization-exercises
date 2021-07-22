@@ -40,14 +40,14 @@ df['passing_english'] = df.english > 70
 # The same should be true for the students passing english.
 # (Hint: you can pass a list to the .sort_values method)
 
-#print(df[['passing_english', 'name']].sort_values(by=['passing_english', 'name']))
+print(df[['passing_english', 'name']].sort_values(by=['passing_english', 'name']))
 
 
 
 # Sort the english grades first by passing_english, and then by the actual english grade, similar to how we did in the last step.
 
 
-#print(df[['passing_english', 'english']].sort_values(by=['passing_english', 'english']))
+print(df[['passing_english', 'english']].sort_values(by=['passing_english', 'english']))
 
 # Calculate each students overall grade and add it as a column on the dataframe. The overall grade is the average of the math, english, and reading grades.
 
@@ -59,14 +59,15 @@ df['overall_grade'] = (df.english + df.math + df.reading)/3
 
 # How many rows and columns are there?
 
-#print(mpg.size)
+print(mpg.size)
 # What are the data types of each column?
-#print(mpg.dtypes)
+
+print(mpg.dtypes)
 # Summarize the dataframe with .info and .describe
 
-#print(mpg.info())
+print(mpg.info())
 
-#print(mpg.describe())
+print(mpg.describe())
 
 # Rename the cty column to city.
 
@@ -76,12 +77,12 @@ mpg = mpg.rename(columns={'cty': 'city'})
 # Rename the hwy column to highway.
 
 mpg = mpg.rename(columns={'hwy': 'highway'})
-#print(mpg.info())
+
 
 # Do any cars have better city mileage than highway mileage?
-# print(mpg[mpg.city > mpg.highway])
 
-# print(mpg[mpg['city'] > mpg['highway']])
+
+print(mpg[mpg['city'] > mpg['highway']])
 
 # Create a column named mileage_difference this column should contain the difference between highway and city mileage for each car.
 
@@ -90,7 +91,7 @@ mpg['mileage_difference'] = mpg.highway - mpg.city
 
 # Which car (or cars) has the highest mileage difference?
 
-#print(mpg['mileage_difference'].nlargest(n=1, keep='all'))
+print(mpg['mileage_difference'].nlargest(n=1, keep='all'))
 
 # Which compact class car has the lowest highway mileage? The best?
 
