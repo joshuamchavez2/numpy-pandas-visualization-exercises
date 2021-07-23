@@ -1,4 +1,4 @@
-from matplotlib.pyplot import nipy_spectral
+ from matplotlib.pyplot import nipy_spectral
 from pandas.core.dtypes.generic import ABCRangeIndex
 from pydataset import data
 import numpy as np
